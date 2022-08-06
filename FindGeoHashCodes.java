@@ -27,17 +27,13 @@ public class FindGeoHashCodes {
             return resultSet;
         }
 
+        Queue<Cell> queue = new LinkedList<>();
+        queue.add(rootCell);
+        queue.add(new Cell("*", false));
+
         int layer = 1;
 
-        Queue<Cell> queue = new LinkedList<>();
-
-        var neighbors = getAll8Neighbors(rootCell);
-
-        addNewNeighbors(resultSet, queue, neighbors);
-
-        queue.add(new Cell("*", false));
-        layer++;
-
+        List<Cell> neighbors;
         Cell cell;
 
         while(layer <= thresholdLayer){
